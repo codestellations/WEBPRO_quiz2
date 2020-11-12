@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DaVentiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="id_book" />
+          </Key>
+          <Property Name="id_book" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="fk_id_category" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="fk_id_promo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="name_book" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="author" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="price_book" Type="money" Nullable="false" />
+          <Property Name="pages" Type="int" Nullable="false" />
+          <Property Name="date_published" Type="date" Nullable="false" />
+          <Property Name="publisher" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="stock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="name_category" Type="varbinary" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id_cust" />
+          </Key>
+          <Property Name="id_cust" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="name_cust" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email_cust" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password_cust" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="phone_num_cust" Type="varchar" MaxLength="13" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_emp" />
+          </Key>
+          <Property Name="id_emp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email_emp" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password_emp" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name_emp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="phone_num_emp" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="fk_id_emp" Type="int" Nullable="false" />
+          <Property Name="fk_id_payment" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="fk_id_cust" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="date_order" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\LENOVO\DOCUMENTS\GITHUB\DAVENTI\DAVENTI\APP_DATA\DAVENTIDB.MDF.dbo.Order_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="fk_id_book" />
+            <PropertyRef Name="fk_id_order" />
+          </Key>
+          <Property Name="fk_id_book" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="fk_id_order" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="id_payment" />
+          </Key>
+          <Property Name="id_payment" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="fk_id_order" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="subtotal" Type="money" Nullable="false" />
+          <Property Name="total_payment" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promo">
+          <Key>
+            <PropertyRef Name="id_promo" />
+          </Key>
+          <Property Name="id_promo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name_promo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="discount" Type="float" Nullable="false" />
+          <Property Name="start_discount" Type="date" Nullable="false" />
+          <Property Name="end_discount" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DaVentiDBModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promo" EntityType="Self.Promo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Order_Details].[fk_id_book] AS [fk_id_book], 
+    [Order_Details].[fk_id_order] AS [fk_id_order]
+    FROM [dbo].[Order_Details] AS [Order_Details]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DaVentiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="id_book" />
+          </Key>
+          <Property Name="id_book" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_category" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_promo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_book" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price_book" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="pages" Type="Int32" Nullable="false" />
+          <Property Name="date_published" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_category" Type="Binary" MaxLength="30" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id_cust" />
+          </Key>
+          <Property Name="id_cust" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_cust" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_cust" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_cust" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_num_cust" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_emp" />
+          </Key>
+          <Property Name="id_emp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email_emp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_emp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_emp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_num_emp" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_emp" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_payment" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_cust" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_order" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="id_payment" />
+          </Key>
+          <Property Name="id_payment" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_order" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="total_payment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promo">
+          <Key>
+            <PropertyRef Name="id_promo" />
+          </Key>
+          <Property Name="id_promo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_promo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="discount" Type="Double" Nullable="false" />
+          <Property Name="start_discount" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_discount" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="fk_id_book" />
+            <PropertyRef Name="fk_id_order" />
+          </Key>
+          <Property Name="fk_id_book" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_id_order" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DaVentiDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Promoes" EntityType="Self.Promo" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DaVentiDBModelStoreContainer" CdmEntityContainer="DaVentiDBEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="id_book" ColumnName="id_book" />
+                <ScalarProperty Name="fk_id_category" ColumnName="fk_id_category" />
+                <ScalarProperty Name="fk_id_promo" ColumnName="fk_id_promo" />
+                <ScalarProperty Name="name_book" ColumnName="name_book" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="price_book" ColumnName="price_book" />
+                <ScalarProperty Name="pages" ColumnName="pages" />
+                <ScalarProperty Name="date_published" ColumnName="date_published" />
+                <ScalarProperty Name="publisher" ColumnName="publisher" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="name_category" ColumnName="name_category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id_cust" ColumnName="id_cust" />
+                <ScalarProperty Name="name_cust" ColumnName="name_cust" />
+                <ScalarProperty Name="email_cust" ColumnName="email_cust" />
+                <ScalarProperty Name="password_cust" ColumnName="password_cust" />
+                <ScalarProperty Name="phone_num_cust" ColumnName="phone_num_cust" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id_emp" ColumnName="id_emp" />
+                <ScalarProperty Name="email_emp" ColumnName="email_emp" />
+                <ScalarProperty Name="password_emp" ColumnName="password_emp" />
+                <ScalarProperty Name="name_emp" ColumnName="name_emp" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone_num_emp" ColumnName="phone_num_emp" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="fk_id_emp" ColumnName="fk_id_emp" />
+                <ScalarProperty Name="fk_id_payment" ColumnName="fk_id_payment" />
+                <ScalarProperty Name="fk_id_cust" ColumnName="fk_id_cust" />
+                <ScalarProperty Name="date_order" ColumnName="date_order" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="id_payment" ColumnName="id_payment" />
+                <ScalarProperty Name="fk_id_order" ColumnName="fk_id_order" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="total_payment" ColumnName="total_payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promoes">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Promo">
+              <MappingFragment StoreEntitySet="Promo">
+                <ScalarProperty Name="id_promo" ColumnName="id_promo" />
+                <ScalarProperty Name="name_promo" ColumnName="name_promo" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="start_discount" ColumnName="start_discount" />
+                <ScalarProperty Name="end_discount" ColumnName="end_discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="DaVentiDBModel.Order_Details">
+              <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="fk_id_book" ColumnName="fk_id_book" />
+                <ScalarProperty Name="fk_id_order" ColumnName="fk_id_order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

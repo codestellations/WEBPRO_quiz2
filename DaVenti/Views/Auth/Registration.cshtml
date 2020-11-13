@@ -6,7 +6,7 @@
 
 }
 
-<h2>Join our team, become one with the wind.</h2>
+<h2>Register</h2>
 
 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
 {
@@ -24,15 +24,15 @@ else
     {
         @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Employee</h4>
+<div class="form-horizontal form-signin">
+    <h4>Join our team, become one with the wind.</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
         @Html.LabelFor(model => model.email_emp, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.email_emp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.email_emp, new { htmlAttributes = new { @class = "form-control", placeholder = "example@email.com" } })
             @Html.ValidationMessageFor(model => model.email_emp, "", new { @class = "text-danger" })
             @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
         </div>
@@ -57,7 +57,7 @@ else
     <div class="form-group">
         @Html.LabelFor(model => model.name_emp, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.name_emp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.name_emp, new { htmlAttributes = new { @class = "form-control", placeholder = "Your Name" } })
             @Html.ValidationMessageFor(model => model.name_emp, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -65,7 +65,12 @@ else
     <div class="form-group">
         @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList("gender", new List<SelectListItem>
+            {
+                new SelectListItem {Text="Select Gender", Value="0", Disabled = true, Selected = true},
+                new SelectListItem {Text="Male", Value="Male"},
+                new SelectListItem {Text="Female", Value="Female"}
+            }, "Select Gender", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -73,7 +78,7 @@ else
     <div class="form-group">
         @Html.LabelFor(model => model.phone_num_emp, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.phone_num_emp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.phone_num_emp, new { htmlAttributes = new { @class = "form-control", placeholder = "08xxxxxxxxxx" } })
             @Html.ValidationMessageFor(model => model.phone_num_emp, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -81,13 +86,20 @@ else
     <div class="form-group">
         @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList("role", new List<SelectListItem>
+            {
+                new SelectListItem {Text="Select Role", Value="0", Disabled = true, Selected = true},
+                new SelectListItem {Text="Manager", Value="Manager"},
+                new SelectListItem {Text="Human Resource", Value="Human Resource"},
+                new SelectListItem {Text="Quality Control", Value="Quality Control"},
+                new SelectListItem {Text="Administrator", Value="Administrator"}
+            }, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="mt-4 mb-3 text-center">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
@@ -101,8 +113,6 @@ else
         }
     }
 }
-
-
 
 <div>
     @Html.ActionLink("Login", "Login")

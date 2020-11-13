@@ -129,9 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PromoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,7 +145,6 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ModelDaVenti.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Extended\Book.cs" />
     <Compile Include="Models\Extended\Employee.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ModelDaVenti.Context.cs">
@@ -238,16 +235,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Registration.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\Create.cshtml" />
-    <Content Include="Views\Book\Details.cshtml" />
-    <Content Include="Views\Book\Edit.cshtml" />
-    <Content Include="Views\Book\Delete.cshtml" />
-    <Content Include="Views\Promo\Index.cshtml" />
-    <Content Include="Views\Promo\Create.cshtml" />
-    <Content Include="Views\Promo\Edit.cshtml" />
-    <Content Include="Views\Promo\Details.cshtml" />
-    <Content Include="Views\Promo\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

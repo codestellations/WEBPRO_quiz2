@@ -15,6 +15,6 @@ namespace DaVenti.Models
     public partial class Category
     {
         public string id_category { get; set; }
-        public byte[] name_category { get; set; }
+        public string name_category { get; set; }
     }
 }

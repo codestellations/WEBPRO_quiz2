@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DaVentiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DaVentiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="id_book" />
@@ -25,7 +25,7 @@
             <PropertyRef Name="id_category" />
           </Key>
           <Property Name="id_category" Type="varchar" MaxLength="6" Nullable="false" />
-          <Property Name="name_category" Type="varbinary" MaxLength="30" Nullable="false" />
+          <Property Name="name_category" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -61,7 +61,7 @@
           <Property Name="status" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\LENOVO\DOCUMENTS\GITHUB\DAVENTI\DAVENTI\APP_DATA\DAVENTIDB.MDF.dbo.Order_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'D:\WEBPRO_QUIZ2\DAVENTI\APP_DATA\DAVENTIDB.MDF.dbo.Order_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Order_Details">
           <Key>
             <PropertyRef Name="fk_id_book" />
@@ -104,8 +104,7 @@ warning 6002: The table/view 'C:\USERS\LENOVO\DOCUMENTS\GITHUB\DAVENTI\DAVENTI\A
     FROM [dbo].[Order_Details] AS [Order_Details]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DaVentiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -129,7 +128,7 @@ warning 6002: The table/view 'C:\USERS\LENOVO\DOCUMENTS\GITHUB\DAVENTI\DAVENTI\A
             <PropertyRef Name="id_category" />
           </Key>
           <Property Name="id_category" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name_category" Type="Binary" MaxLength="30" FixedLength="false" Nullable="false" />
+          <Property Name="name_category" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>

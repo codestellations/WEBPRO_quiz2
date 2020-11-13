@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DaVenti.Models.Book>
+
+@{
+    ViewBag.Title = "Book Data";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Book Title
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Date Published
+        </th>
+        <th>
+            Publisher
+        </th>
+        <th>
+            Stock
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_book)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price_book)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_published)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_book }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_book }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_book })
+        </td>
+    </tr>
+}
+
+</table>

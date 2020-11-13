@@ -8,6 +8,7 @@ using DaVenti.Models;
 
 namespace DaVenti.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         // GET: Book

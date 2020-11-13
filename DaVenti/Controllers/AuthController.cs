@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DaVenti.Controllers
 {
@@ -57,6 +58,57 @@ namespace DaVenti.Controllers
             ViewBag.Message = message;
             ViewBag.Status = Status;
             return View(employee);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Login login, string returnUrl)
+        {
+            string message = "";
+
+            using (DaVentiDBEntities en  = new DaVentiDBEntities())
+            {
+                var check = en.Employees.Where(a => a.email_emp == login.email_emp).FirstOrDefault();
+
+                if(check != null)
+                {
+                    if(string.Compare(login.password_emp, check.password_emp) == 0)
+                    {
+                        if (Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        message = "Invalid credentials!";
+                    }
+                }
+                else
+                {
+                    message = "Invalid credentials!";
+                }
+            }
+
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Employee");
         }
 
         [NonAction]

@@ -146,6 +146,7 @@
       <DependentUpon>ModelDaVenti.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Extended\Employee.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ModelDaVenti.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -233,6 +234,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Registration.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -97,6 +97,7 @@ ipch/
 *.ncb
 *.opendb
 *.opensdf
+*.sdf
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
@@ -245,7 +246,6 @@ ServiceFabricBackup/
 *.rptproj.bak
 
 # SQL Server files
-*.mdf
 *.ldf
 *.ndf
 

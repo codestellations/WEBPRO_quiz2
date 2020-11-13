@@ -11,7 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.fk_id_category)
+            Book ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_book)
+        </dd>
+        <dt>
+            Category ID
         </dt>
 
         <dd>
@@ -19,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fk_id_promo)
+            Promo ID
         </dt>
 
         <dd>
@@ -27,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name_book)
+            Book Title
         </dt>
 
         <dd>
@@ -35,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.author)
+            Author
         </dt>
 
         <dd>
@@ -43,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price_book)
+            Book Price
         </dt>
 
         <dd>
@@ -51,7 +58,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.pages)
+            Pages
         </dt>
 
         <dd>
@@ -59,7 +66,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date_published)
+            Date Published
         </dt>
 
         <dd>
@@ -67,7 +74,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.publisher)
+            Publisher
         </dt>
 
         <dd>
@@ -75,7 +82,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.stock)
+            Stock
         </dt>
 
         <dd>
@@ -84,7 +91,10 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_book }) |
+<div class="form-actions no-color col-md-offset-2 col-md-10">
+    <a class="btn btn-warning" onclick="location.href='@Url.Action("Edit", new { id = Model.id_book })';return false;">Edit</a>
+</div>
+
+<div class="form-actions no-color">
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

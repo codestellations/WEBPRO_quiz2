@@ -148,7 +148,6 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ModelDaVenti.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Extended\Book.cs" />
     <Compile Include="Models\Extended\Employee.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ModelDaVenti.Context.cs">

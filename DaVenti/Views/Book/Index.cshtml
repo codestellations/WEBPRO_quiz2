@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<DaVenti.Models.Book>
 
 @{
-    ViewBag.Title = "Book Data";
+    ViewBag.Title = "Book List";
 }
 
-<h2>Index</h2>
+<h2>Book List</h2>
+<a class="btn btn-success pull-right" onclick="location.href='@Url.Action("Create")';return false;">Add New Book</a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-hover table-striped">
     <tr>
+        <th>
+            Book ID
+        </th>
         <th>
             Book Title
         </th>
@@ -19,9 +20,6 @@
         </th>
         <th>
             Price
-        </th>
-        <th>
-            Date Published
         </th>
         <th>
             Publisher
@@ -33,31 +31,31 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_book)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price_book)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_published)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.publisher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_book }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_book }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_book })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id_book)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.name_book)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.author)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.price_book)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.publisher)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.stock)
+    </td>
+    <td>
+        <a class="btn btn-warning" onclick="location.href='@Url.Action("Edit", new { id = item.id_book })';return false;">Edit</a>
+        <a class="btn btn-info" onclick="location.href='@Url.Action("Details", new { id = item.id_book })';return false;">Details</a>
+        <a class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.id_book })';return false;">Delete</a>
+    </td>
+</tr>
 }
 
 </table>

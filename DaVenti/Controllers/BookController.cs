@@ -48,7 +48,7 @@ namespace DaVenti.Controllers
                     dBEntities.SaveChanges();
                 }
                 // TODO: Add insert logic here
-
+                ViewBag.Message = "Book added";
                 return RedirectToAction("Index");
             }
             catch

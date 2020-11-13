@@ -68,7 +68,7 @@ namespace DaVenti.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Login login, string returnUrl)
+        public ActionResult Login(Login login)
         {
             string message = "";
 
@@ -80,18 +80,12 @@ namespace DaVenti.Controllers
                 {
                     if(string.Compare(login.password_emp, check.password_emp) == 0)
                     {
-                        if (Url.IsLocalUrl(returnUrl))
-                        {
-                            return Redirect(returnUrl);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
+                        FormsAuthentication.SetAuthCookie(login.email_emp, false);
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        message = "Invalid credentials!";
+                        message = "Wrong email or password!";
                     }
                 }
                 else
@@ -108,7 +102,7 @@ namespace DaVenti.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Employee");
+            return RedirectToAction("Login", "Auth");
         }
 
         [NonAction]

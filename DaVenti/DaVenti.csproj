@@ -248,6 +248,7 @@
     <Content Include="Views\Promo\Edit.cshtml" />
     <Content Include="Views\Promo\Details.cshtml" />
     <Content Include="Views\Promo\Delete.cshtml" />
+    <Content Include="Views\Shared\_Landing.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,50 @@
+﻿@model DaVenti.Models.Promo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Promo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_promo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_promo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.start_discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.start_discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.end_discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.end_discount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_promo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
